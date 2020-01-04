@@ -4,7 +4,6 @@ use win32_notification::NotificationBuilder;
 
 fn main() {
     let notification = NotificationBuilder::new()
-        .expect("Failed to create notification builder")
         .title_text("Notification Title")
         .info_text("This is the notification body")
         .build();
