@@ -2,7 +2,7 @@
 
 A simple wrapper around [`Shell_NotifyIcon`](https://docs.microsoft.com/en-us/windows/win32/api/shellapi/nf-shellapi-shell_notifyiconw). See [my blog post](https://lily.fyi/blog/posts/rust-windows-notifications/) for more information on how this works.
 
-```src
+```rust
 use std::thread;
 use std::time::Duration;
 use win32_notification::NotificationBuilder;
