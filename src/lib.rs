@@ -133,15 +133,15 @@ pub enum NotificationBuilderError {
 
 impl NotificationBuilder {
     /// Creates a notification builder with a new GUID.
-    pub fn new() -> Result<NotificationBuilder, NotificationBuilderError> {
+    pub fn new() -> NotificationBuilder {
         let notification_descriptor = NOTIFYICONDATAW {
             cbSize: std::mem::size_of::<NOTIFYICONDATAW>() as u32,
             uFlags: shellapi::NIF_INFO | shellapi::NIF_GUID,
-            guidItem: generate_guid().map_err(|e| NotificationBuilderError::WindowsError(e))?,
+            guidItem: generate_guid().expect("Unable to generate a new GUID"),
             ..Default::default()
         };
 
-        Ok(NotificationBuilder(notification_descriptor))
+        NotificationBuilder(notification_descriptor)
     }
 
     /// Sets the text that will be the notification's body.
@@ -165,8 +165,9 @@ impl NotificationBuilder {
     }
 
     /// Consumes the builder and creates a Notification.
-    pub fn build(self) -> Notification {
-        Notification(RefCell::new(self.0))
+    pub fn build(mut self) -> Result<Notification, NotificationBuilderError> {
+        self.0.guidItem = generate_guid().map_err(|e| NotificationBuilderError::WindowsError(e))?;
+        Ok(Notification(RefCell::new(self.0)))
     }
 }
 
@@ -204,7 +205,7 @@ mod tests {
     fn test_notification_builder() {
         // Technically CoCreateGuid can fail and cause this test to fail.
         // I don't expect this to happen.
-        let mut builder = NotificationBuilder::new().expect("new call should succeed");
+        let mut builder = NotificationBuilder::new();
         builder = builder.info_text("test");
         let mut expected_info_text = [0u16; INFO_BUFFER_LEN];
         expected_info_text[0] = 116;
@@ -233,7 +234,7 @@ mod tests {
             expected_title_text.iter().collect::<Vec<&u16>>()
         );
 
-        let notification = builder.build();
+        let notification = builder.build().expect("should create notification");
         assert_eq!(
             notification.0.borrow().szInfo.iter().collect::<Vec<&u16>>(),
             expected_info_text.iter().collect::<Vec<&u16>>()
