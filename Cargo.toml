@@ -1,0 +1,13 @@
+[package]
+name = "win32_notification"
+version = "0.1.0"
+authors = ["AmaranthineCodices <git@amaranthinecodices.me>"]
+edition = "2018"
+categories = [ "os", "os::windows-apis" ]
+description = "Allows easy creation and manipulation of Win32 notifications."
+keywords = [ "win32", "windows", "notification" ]
+license = "MIT"
+repository = "https://github.com/AmaranthineCodices/win32-notification"
+
+[dependencies]
+winapi = { version = "0.3", features = [ "shellapi", "combaseapi", "errhandlingapi", "impl-default", "winerror", "impl-debug" ] }
