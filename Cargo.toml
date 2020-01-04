@@ -8,6 +8,7 @@ description = "Allows easy creation and manipulation of Win32 notifications."
 keywords = [ "win32", "windows", "notification" ]
 license = "MIT"
 repository = "https://github.com/AmaranthineCodices/win32-notification"
+readme = "README.md"
 
 [dependencies]
 winapi = { version = "0.3", features = [ "shellapi", "combaseapi", "errhandlingapi", "impl-default", "winerror", "impl-debug" ] }
