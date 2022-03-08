@@ -1,6 +1,6 @@
 # `win32_notification`
 
-A simple wrapper around [`Shell_NotifyIcon`](https://docs.microsoft.com/en-us/windows/win32/api/shellapi/nf-shellapi-shell_notifyiconw). See [my blog post](https://lily.fyi/blog/posts/rust-windows-notifications/) for more information on how this works.
+A simple wrapper around [`Shell_NotifyIcon`](https://docs.microsoft.com/en-us/windows/win32/api/shellapi/nf-shellapi-shell_notifyiconw). See [my blog post](https://lily.fyi/2020/01/03/rust-windows-notifications.html) for more information on how this works.
 
 ```rust
 use std::thread;

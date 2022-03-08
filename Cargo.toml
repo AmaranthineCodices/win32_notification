@@ -7,7 +7,7 @@ categories = [ "os", "os::windows-apis" ]
 description = "Allows easy creation and manipulation of Win32 notifications."
 keywords = [ "win32", "windows", "notification" ]
 license = "MIT"
-repository = "https://github.com/AmaranthineCodices/win32-notification"
+repository = "https://github.com/AmaranthineCodices/win32_notification"
 readme = "README.md"
 
 [dependencies]
